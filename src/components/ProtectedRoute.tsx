@@ -3,20 +3,20 @@ import { useAuthContext } from '../contexts/AuthContext';
 import { useEffect } from 'react';
 
 const ProtectedRoutes = () => {
-  const authContext = useAuthContext();
-  const navigate = useNavigate();
+    const authContext = useAuthContext();
+    const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!authContext.isAuthenticated) {
-      navigate('/authentication');
+    useEffect(() => {
+        if (!authContext.isAuthenticated) {
+            navigate('/authentication');
+        }
+    }, [authContext]);
+
+    if (authContext.user) {
+        return <Outlet />;
     }
-  }, [authContext]);
 
-  if (authContext.user) {
-    return <Outlet />;
-  }
-
-  return null;
+    return null;
 };
 
 export default ProtectedRoutes;

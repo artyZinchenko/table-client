@@ -1,3 +1,3 @@
 export const config = {
-  apiBaseUrl: 'https://table-client.onrender.com/api',
+    apiBaseUrl: 'https://table-client.onrender.com/api',
 };

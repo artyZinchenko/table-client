@@ -4,21 +4,21 @@ import { config } from '../config';
 const url = config.apiBaseUrl;
 
 const getUsers = async (token: string) => {
-  try {
-    const response = await axios.get(`${url}/users/`, {
-      headers: {
-        Authorization: 'Bearer ' + token,
-      },
-    });
+    try {
+        const response = await axios.get(`${url}/users/`, {
+            headers: {
+                Authorization: 'Bearer ' + token,
+            },
+        });
 
-    return response;
-  } catch (error) {
-    if (error instanceof AxiosError) {
-      console.log(error.message);
+        return response;
+    } catch (error) {
+        if (error instanceof AxiosError) {
+            console.log(error.message);
+        }
     }
-  }
 };
 
 export default {
-  getUsers,
+    getUsers,
 };

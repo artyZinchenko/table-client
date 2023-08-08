@@ -7,24 +7,27 @@ import Root from './components/AuthPage/Root';
 import Table from './components/Table/UserTable';
 
 const App = () => {
-  const queryClient = new QueryClient();
-  return (
-    <AuthContextProvider>
-      <BrowserRouter>
-        <QueryClientProvider client={queryClient}>
-          <Routes>
-            <Route path='*' element={<Navigate to='/table' replace />} />
-            <Route path='/authentication' element={<Root />} />
+    const queryClient = new QueryClient();
+    return (
+        <AuthContextProvider>
+            <BrowserRouter>
+                <QueryClientProvider client={queryClient}>
+                    <Routes>
+                        <Route
+                            path='*'
+                            element={<Navigate to='/table' replace />}
+                        />
+                        <Route path='/authentication' element={<Root />} />
 
-            <Route element={<ProtectedRoutes />}>
-              <Route path='/table' element={<Table />} />
-            </Route>
-          </Routes>
-          <ReactQueryDevtools initialIsOpen={false} />
-        </QueryClientProvider>
-      </BrowserRouter>
-    </AuthContextProvider>
-  );
+                        <Route element={<ProtectedRoutes />}>
+                            <Route path='/table' element={<Table />} />
+                        </Route>
+                    </Routes>
+                    <ReactQueryDevtools initialIsOpen={false} />
+                </QueryClientProvider>
+            </BrowserRouter>
+        </AuthContextProvider>
+    );
 };
 
 export default App;
