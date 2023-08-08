@@ -1,26 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { AuthContextProvider } from './contexts/AuthContext';
+import { Route, Routes, BrowserRouter, Navigate } from 'react-router-dom';
+import ProtectedRoutes from './components/ProtectedRoute';
+import Root from './components/AuthPage/Root';
+import Table from './components/Table/UserTable';
 
-function App() {
+const App = () => {
+  const queryClient = new QueryClient();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AuthContextProvider>
+      <BrowserRouter>
+        <QueryClientProvider client={queryClient}>
+          <Routes>
+            <Route path='*' element={<Navigate to='/table' replace />} />
+            <Route path='/authentication' element={<Root />} />
+
+            <Route element={<ProtectedRoutes />}>
+              <Route path='/table' element={<Table />} />
+            </Route>
+          </Routes>
+          <ReactQueryDevtools initialIsOpen={false} />
+        </QueryClientProvider>
+      </BrowserRouter>
+    </AuthContextProvider>
   );
-}
+};
 
 export default App;
