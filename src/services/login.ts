@@ -18,8 +18,7 @@ const login = async (
         return { foundUser, token };
     } catch (error) {
         if (error instanceof AxiosError && error.response) {
-            console.log(error.response.data);
-            window.alert(error.response.data.error);
+            window.alert(error.response.data.message);
         }
     }
 };

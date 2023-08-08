@@ -21,12 +21,23 @@ const SignIn = ({ setSignInPage }: Props) => {
     const [password, setPassword] = useState('');
     const [disabled, setDisabled] = useState(false);
 
-    const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        setDisabled(true);
+    useEffect(() => {
+        if (!email || !password) {
+            setDisabled(true);
+        } else {
+            setDisabled(false);
+        }
+    }, [password, email]);
 
-        await authContext.login(email, password);
-        setDisabled(false);
+    const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+        try {
+            event.preventDefault();
+            setDisabled(true);
+
+            await authContext.login(email, password);
+        } finally {
+            setDisabled(false);
+        }
     };
 
     useEffect(() => {

@@ -14,7 +14,7 @@ const signup = async (username: string, email: string, password: string) => {
         return response.data;
     } catch (error) {
         if (error instanceof AxiosError && error.response) {
-            console.log(error.response.data);
+            window.alert(error.response.data.message);
         }
     }
 };

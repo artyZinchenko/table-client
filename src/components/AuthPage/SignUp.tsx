@@ -23,10 +23,20 @@ const SignUp = ({ setSignInPage }: Props) => {
     const [email, setEmail] = useState('');
     const [disabled, setDisabled] = useState(false);
 
+    useEffect(() => {
+        if (!username || !email || !password) {
+            setDisabled(true);
+        } else {
+            setDisabled(false);
+        }
+    }, [username, password, email]);
+
     const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         try {
             event.preventDefault();
             setDisabled(true);
+
+            if (!username || !email || !password) return;
 
             const signup = await signupServices.signup(
                 username,

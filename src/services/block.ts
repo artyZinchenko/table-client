@@ -18,6 +18,7 @@ const block = async (token: string, ids: number[]) => {
         return response;
     } catch (error) {
         if (error instanceof AxiosError) {
+            console.log(error.message);
             return error.response;
         }
     }
